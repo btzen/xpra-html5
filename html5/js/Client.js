@@ -2826,7 +2826,7 @@ class XpraClient {
 
         let name = entry.Name;
         name = Utilities.trimString(name, 15);
-        const command = entry.Exec.replace(/%[FUfu]/g, "");
+        const command = (entry.Exec || "").replace(/%[FUfu]/g, "");
 
         const divLeft = document.createElement("div");
         divLeft.className = "menu-divleft";
@@ -3370,6 +3370,8 @@ class XpraClient {
     let x = packet[2];
     let y = packet[3];
     const win = this.id_to_window[wid];
+    console.info("----------------------------------------");
+    console.info("process pointer position:", win.cursor_data, this.scale);
     //we can use window relative coordinates:
     if (packet.length >= 6 && win) {
       const pos = jQuery(win.div).position()
@@ -3402,7 +3404,7 @@ class XpraClient {
     style.height = `${h}px`;
     shadow_pointer.src = cursor_url;
     style.left = `${x}px`;
-    style.top = `${y}px`;
+    style.top = `${y + 30 / 1.5}px`;
     style.display = "inline";
   }
 

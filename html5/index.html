@@ -1269,12 +1269,11 @@
       }
 
       function toggle_fullscreen() {
-        const f_el = Object.hasOwn(document, "requestFullScreen");
-        if (!f_el) {
+        if (document.body.requestFullscreen) {
           const elem = document.getElementById("fullscreen_button");
-          var is_fullscreen = document.fullScreen;
+          var is_fullscreen = document.fullscreen;
           if (!is_fullscreen) {
-            const req = elem.requestFullScreen;
+            const req = elem.requestFullscreen;
             if (req) {
               req.call(document.body);
 
